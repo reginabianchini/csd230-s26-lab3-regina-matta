@@ -1,7 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head><title>Add Book</title></head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <div style="float:right">
+        <!-- Display logged in user -->
+        Logged in as: <span sec:authentication="name">User</span>
+
+        <!-- Logout Form (Must be POST for security) -->
+        <form th:action="@{/logout}" method="post" style="display:inline;">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+    <title>Add Book</title>
+</head>
 <body>
+<div sec:authorize="hasRole('ADMIN')">
+
+</div>
 <h1>Add New Book</h1>
 <form th:action="@{/books/add}" th:object="${book}" method="post">
     <!-- CRITICAL: This line preserves the ID during the edit -->

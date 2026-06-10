@@ -3,9 +3,11 @@ package csd230.s26.lab1.entities;
 import jakarta.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
 
 @Entity
-@Table(name = "carts")
+@Table(name = "cart_entity")
 public class CartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,4 +42,11 @@ public class CartEntity {
     public String toString() {
         return "CartEntity{id=" + id + ", productCount=" + products.size() + "}";
     }
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
+    // ... Getters and Setters for user ...
+    public UserEntity getUser() { return user; }
+    public void setUser(UserEntity user) { this.user = user; }
 }
